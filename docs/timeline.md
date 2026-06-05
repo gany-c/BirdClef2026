@@ -214,3 +214,14 @@
 		1. Training notebook for filtering by family https://www.kaggle.com/code/gany24558/family-specific-b0-training-noteboo
 		2. Individually produces 0.665 - https://www.kaggle.com/code/gany24558/single-model-inference-notebook?scriptVersionId=323624764
 		3. 3 way ensembles don't produce any improvement - 0.845, 0.847
+-  2 Jun 2026 (Tue)
+    -  pseudo labeled the soundscapes directory, region S22; picked the first 500 files, https://www.kaggle.com/code/gany24558/pseudo-labeling-soundscapes 
+    -  Re-Trained the base model with this dataset as an additional input
+    	- The model trained along with the pseudo labelled set underperformed - 0.834
+		- Interestingly the intermediate models of the above model did better than the final, but still not good enough - 0.835 and 0.837
+	- The ensemble of the final model and the previous model also underperformed at 0.839, i.e. both B3s unlike previous B3 and B0
+-  3 Jun 2026 (Wed)
+    -  Another pseudolabelling, Created a larger soundscape labelled set - S08 and S22, but only with the rare species and a threshold of 0.8 https://www.kaggle.com/code/gany24558/pseudo-labeling-soundscapes
+        - Pseudo samples are 42.7% of training
+        - Training another version of the base model with this
+        - It again produced worse results - 0.826 and 0.829

@@ -1,7 +1,7 @@
 
+# Transfer Learning with Pseudo Multi-Label Birdcall Classification for DS@GT BirdCLEF 2024
 
-
-https://arxiv.org/html/2407.06291v1
+These are notes from https://arxiv.org/html/2407.06291v1
 
 BirdNET is a popular birdcall classification model that utilizes the spectrogram-CNN approach. It is widely distributed in the field due to its high accuracy and ease of use on mobile devices [5]. 
 
@@ -12,9 +12,7 @@ We explore the effectiveness of transfer learning, where bird vocalization predi
 We hypothesize that transfer learning is an effective technique for the competition because existing models capture underlying structures amenable to optimization by simple linear classifiers. 
 
 
-Training Pipeline in the paper
-
-
+## Training Pipeline in the paper
 
 
 Step 1: The Inputs (Far Left)
@@ -23,7 +21,7 @@ The pipeline starts with two sets of raw audio data:
 1. train audio: The crowd-sourced, clean, isolated bird clips.
 2. test audio: The messy, 4-minute wild soundscapes (where multiple birds are overlapping).
 
-Step 2: The Two Core Models (Middle-Left)
+## Step 2: The Two Core Models (Middle-Left)
 
 The audio is immediately split and sent to two completely different pre-trained models simultaneously:
 - Google Bird Vocalization (The Teacher / Surrogate): * It takes the train audio and outputs a soft prediction.
@@ -31,25 +29,25 @@ The audio is immediately split and sent to two completely different pre-trained 
 - BirdNET (The Student / Feature Extractor):
 	- It takes the exact same train audio and shrinks it down into a highly descriptive numeric summary called an embedding. It doesn't look at BirdNET's final predictions; it only captures BirdNET's underlying understanding of the sound.
 
-Step 3: Pairing Data in the Storage Bank (Center Database)
+## Step 3: Pairing Data in the Storage Bank (Center Database)
 
 The output from both models is merged into a single database called train embeddings.
 Inside this database, every single 5-second chunk of audio now has a paired record:
 - The Features: BirdNET's acoustic fingerprint vectors.
 - The Labels: Google's soft predictions used as pseudo-labels (surrogate targets).
 
-Step 4: Training the Domain Multi-Label Classifier (Middle-Right)
+## Step 4: Training the Domain Multi-Label Classifier (Middle-Right)
 
 Now, the actual learning happens in a small, lightweight custom model (like a simple linear layer or a small PyTorch network)
 
 
-Summary: 
+## Summary: 
 
 
 So, basically, this pipeline is just compressing the huge NN into a smaller classifier, essentially looking at a classic Model Compression and Knowledge Distillation technique.
 
 
-Follow up Questions:
+## Follow up Questions:
 
 Notes: Transfer Learning with Pseudo Multi-Label Birdcall Classification for DS@GT BirdCLEF 2024
 
@@ -67,7 +65,7 @@ Notes: Transfer Learning with Pseudo Multi-Label Birdcall Classification for DS@
 	4. add M3 to the ensemble
 
 
-Pseudo Label Predictions:
+## Pseudo Label Predictions:
 
 
 In the paper, pseudo label predictions are limited to the competition’s species set. If the species is not present, its prediction is set to zero by assigning negative infinity to the logit output.
@@ -76,13 +74,13 @@ In our case we should limit the predictions to the primary and secondary labels 
 Similarly, we should follow what is being done in section 5.3 Pseudo Multi-Label Construction of the paper. Only difference being, we should use Primary and Secondary labels instead of the folder name
 
 
-Loss Functions in Training
+## Loss Functions in Training
 
 
 Once the dataset is built, and we train the new model, choose the appropriate loss function from  section 5.4. Training Losses
 
 
-Inference and Embeddings generation
+## Inference and Embeddings generation
 
 
 When we do inference, again we'll have to generate the embeddingss
