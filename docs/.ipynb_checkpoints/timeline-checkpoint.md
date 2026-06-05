@@ -1,0 +1,227 @@
+- 20 Apr 2026 (Mon) 
+	- Built the initial BirdCLEF training and inference notebooks 
+	- First successful submission scored 0.636 (notebook-gc-2026 v2) 
+	- Initial leaderboard ranking in the 2000s 
+- 21 Apr 2026 (Tue) 
+	- Reviewed and understood most of the Kaggle training and inference pipeline 
+- 22 Apr 2026 (Wed) 
+	- Finished reading nearly all remaining Kaggle notebook code and theory 
+- 23 Apr 2026 (Thu) 
+	- Finished Jupyter notebook notes 
+	- Planned rank-improvement strategy 
+- 24 Apr 2026 (Fri) 
+	- Improved score to 0.655 (v4) using threshold adjustment in Inference
+	- Began normalization experiments on the spectrogram
+		- Reduced the score 
+	- Identified future improvements: 
+		- Bird-sound mixing 
+		- Splitting pretraining and training notebooks 
+- 25 Apr 2026 (Sat) 
+	- Implemented train/test split and MixUp augmentation 
+	- Score improved to 0.686 (v5) 
+- 26 Apr 2026 (Sun) 
+	- MixUp improved score to 0.706 (v16/v23) 
+	- Added temporal smoothing in inference 
+	- Score increased to 0.732 (v25) 
+- 27 Apr 2026 (Mon) 
+	- Tested smoothing improvements with small gains 
+	- Tried increasing mixed samples; performance dropped 
+	- Verified sigmoid already existed in inference notebook 
+- 28 Apr 2026 (Tue) 
+	- Rupal joined the Kaggle effort 
+	- Shared notebooks and assigned collaboration tasks 
+- 29 Apr 2026 (Wed) 
+	- Fixed MixUp implementation 
+	- Score improved to 0.742 (v31/v39) 
+	- Assigned inference experiments to Rupal 
+- 30 Apr 2026 (Thu) 
+	- Studied: 
+		- MixUp algorithm 
+		- Smoothing 
+		- Sigmoid vs softmax 
+		- EfficientNet variants 
+	- Had a sync-up with Rupal 
+- 1 May 2026 (Fri) 
+	- Added: 
+		- SpecAugment 
+		- CosineAnnealingLR 
+		- Early stopping 
+		- LR reduction to 3e-4 
+	- Score remained around 0.742 
+- 2 May 2026 (Sat) 
+	- Fully migrated training notebook to Kaggle 
+	- Created Kaggle dataset of NumPy vectors for faster loading 
+	- Upgraded architecture to EfficientNet-B3 for testing 
+- 3 May 2026 (Sun) 
+	- Tested EfficientNet-B3; no improvement 
+	- Began exploring training_soundscapes integration 
+- 4 May 2026 (Mon) 
+	- Major breakthrough: 
+		- Competition actually had 234 classes, not 206 
+		- Missing species existed only in train_soundscape_labels.csv 
+	- Fixed pipeline: 
+		- NUM_CLASSES = 234 
+		- Encoder trained on all taxonomy classes 
+		- Processed 66 soundscape files into .npy clips 
+		- Integrated soundscape training data 
+		- MixUp extended across both datasets - train.csv and train_labels_soundscapes.csv 
+	- Score improved to 0.817 (v52) 
+- 5 May 2026 (Tue) 
+	- Trained EfficientNet-B3 for 30 epochs; slight drop to 0.814 (v54) 
+	- Tested loading NumPy features directly from Kaggle datasets 
+	- Handed ensemble task to Rupal 
+- 6 May 2026 (Wed) 
+	- Ensemble of EfficientNet-B0 + B3 improved score to 0.828 
+	- Tested multiple ensemble weight combinations 
+	- Rupal collaborated on ensemble experiments 
+	- Successful submissions: 
+		- Ensemble-based-inference v2 
+		- v4 
+		- v6 
+		- Scores around 0.828 
+- 7 May 2026 (Thu) 
+	- Assigned secondary-label integration task to Rupal 
+	- She completed the required code changes 
+- 8–10 May 2026 (Fri–Sun) 
+	- Rupal implemented secondary-label training pipeline 
+	- Secondary-label training runs started 
+- 11 May 2026 (Mon) 
+	- Finished training secondary-label model 
+	- Secondary-label-only model achieved 0.826 (v56) 
+	- Existing ensemble remained around 0.828 
+	- Began designing new multi-model ensemble strategy 
+- 12 May 2026 (Tue) 
+	- Achieved new high score of 0.836 using a 3-way ensemble 
+	- Ensemble combined: 
+		- Secondary-label model 
+		- Soundscape-trained 234-class model 
+		- Original train.csv model 
+	- Created an analysis notebook from the inference notebook 
+		- Identified commonly misclassified species 
+		- Found strong latitude/longitude effects in predictions 
+		- Began experiments using ratings column in training 
+	- Linear weighting reduced score to 0.825 (v60) 
+	- Square-root weighting reduced score further to 0.822 (v62) 
+	- Notebook link: 
+		- https://www.kaggle.com/code/gany24558/notebook-gc-2026?scriptVersionId=318684391
+- 13 May 2026 (Wed ) 
+	- notebook-gc-2026 v64 scored 0.828 after ratings experiments 
+	- Ensemble-based-inference v8 and v11 achieved 0.838 
+	- Ensemble-based-inference v15 achieved new peak score of 0.839 
+	- Current best leaderboard candidates: 
+		- 0.839 
+		- 0.838 
+- 14 May 2026 Thu
+	- No progress
+- 15 May 2026 (Fri)
+	- Tried 3 inference changes without fully understanding them
+		- None of the inference changes improved the score
+		- Attempted reverting the inference modifications
+	- Analyzed worst-case failures in the model analysis notebook
+	- Found that worst soundscape failures had no matching examples in train.csv
+	- Found second worst failure had a train:soundscape ratio of 23:666
+- 16 May 2026 (Sat)
+	- Attempted to consult former colleague/data scientist Arkadeep Banerjee
+	- Went through the model analysis notebook in detail
+		- Verified label encoding matched training pipeline correctly
+		- Confirmed inference/training label mapping was safe
+	- Examined the soundscape-to-training-data notebook
+- 17 May 2026 (Sun)
+	- Helped resolve issues in Rupal’s inference notebook
+	- Successfully got Rupal’s inference pipeline working
+- 18 May 2026 (Mon)
+	- Compared Rupal’s ensemble version with personal 0.839 version
+		- Determined versions 15 and 20 were effectively identical
+	- Fully understood remaining theory in the model analysis notebook
+	- Ran several inference experiments based on notebook findings
+		- Score remained stuck at 0.839
+		- Planned deeper investigation into soundscape notebook strategies
+- 19 May 2026 (Tue)
+	- Fully understood the workflow of the notebook which converts the soundscape files into a dataset 
+	- Designed a new strategy for representing soundscapes - Each row will have multiple primary labels
+		- Replaced separate rows per primary label with a single composite-label row
+		- Created new soundscape composite-label dataset
+		- Dataset link: BirdCLEF Groundtruth Soundscape Composite Dataset
+- 20 May 2026 (Wed)
+	- Created new training notebook using composite-label soundscape method
+		- Use the above composite primary label dataset, corresponding code changes
+		- Excluded soundscape rows from audio mixing pipeline since they already had multiple primary labels
+	- Training extended overnight; Inference and scoring was next day
+- 21 May 2026 (Thu)
+	- Ran inference on composite-label training output
+	- Single model score improved from 0.828 → 0.840
+	- Integrated new model into ensemble pipeline
+	- Replaced ensemble base model and achieved 0.847
+	- Built binary ensemble which achieved 0.850
+- 22 May 2026 (Friday)
+	- Trained model using ASL loss + Macro F1 optimization
+	- Initial ASL model scored 0.830
+	- Extended training to 70 epochs
+	- Score further dropped to 0.827
+	- Ensembles using ASL models achieved poor scores (0.835, 0.836)
+	- Continued experimenting with ensembles and longer training schedules
+- 23 May 2026 (Sat)
+	- Studied unresolved theory questions from earlier analysis
+	- Read research paper: Transfer Learning with Pseudo Multi-Label Birdcall Classification for DS@GT BirdCLEF 2024
+- 24 May 2026 (Sun)
+	- Finished studying theory questions
+	- Developed transfer learning strategy based on paper findings
+	- Identified Google Bird Vocalization Classifier (Perch) as promising addition:
+		- Already being used in competition scoring 0.825 solo and 0.867 in a blend
+		- Handed Perch ensemble experiment and transfer learning strategy to Rupal
+- 25 May 2026 (Mon)
+	- Attempted to use Google Perch directly in inference ensemble
+		- Inference failed to complete within 90-minute CPU time limit
+		- GPU/TPU accelerators not available for submission notebooks
+		- Perch approach abandoned as standalone inference tool
+	- Continued reading the DS@GT BirdCLEF 2024 paper
+- 26 May 2026 (Tue)
+	- Explained pseudo-labelling approach to Rupal; jointly debugging implementation
+	- Notebook: https://www.kaggle.com/code/rupalkatariya/pseudo-label-transfer-learning/edit 
+	- Continued reading paper — sections 6 and 7 remaining
+- 27 May 2026 (Wed)
+	- Got Rupal's pseudo-labelling pipeline based on Perch and BirdNET running
+	- BirdNET failed to produce embeddings — only produced logits
+		- Required version of BirdNET not publicly available
+	- Switched teacher model strategy: using own ensemble as pseudo-label source instead of Perch/BirdNET
+- 28 May 2026 (Thu)
+	- Built chunking and pseudo-labelling notebook using own ensemble as teacher model
+	- Notebook: https://www.kaggle.com/code/gany24558/chunking-and-pseudo-labelling/edit 
+	- Training ran for several hours but failed due to memory issues
+		- 2.5-second stride created too many chunks, exceeded 20GB storage limit
+		- Reran with longer stride — completed successfully but Kaggle upload failed due to pre-existing metadata conflict
+		- Scheduled rerun for next day
+- 29 May 2026 (Fri)
+	- First 6 hours spent debugging pseudo-labelling preprocessing
+	- Created dataset for pseudo-labelled data
+	- Discovered the training notebook for the pseudo-labelled model had significant discrepancies
+		- Make sure they share the same backbone and classifier
+	- Submitted the faulty model for inference — scored 0.506 confirming the issue
+	- Fixed training pipeline; waiting for the weekly GPU quota to restore next day
+- 30 May 2026 (Sat)
+	- Ran corrected pseudo-labelling training notebook
+		- Notebook: https://www.kaggle.com/code/gany24558/chunking-and-pseudo-labelling 
+	- Restored correct inference notebook
+		- Notebook: https://www.kaggle.com/code/gany24558/single-model-inference-notebook 
+		- Standalone pseudo-label model scored 0.771 — significantly below best previous model of 0.840
+		- Adding to ensemble reduced score to 0.838 — worse than existing 0.850 best
+	- Pseudo-labelling experiment inconclusive; model not strong enough to benefit ensemble
+- 31 May 2026 (Sun)
+	- Over sampled 3 amphibians which are present in Soundscape only and not it train
+	- Managed to improve the single model score to 0.843, but ensemble score is the same at 0.850 
+-  1 Jun 2026 (Mon)
+	- created an Amphibian only B0 model and add it to the ensemble
+		1. Training notebook for filtering by family https://www.kaggle.com/code/gany24558/family-specific-b0-training-noteboo
+		2. Individually produces 0.665 - https://www.kaggle.com/code/gany24558/single-model-inference-notebook?scriptVersionId=323624764
+		3. 3 way ensembles don't produce any improvement - 0.845, 0.847
+-  2 Jun 2026 (Tue)
+    -  pseudo labeled the soundscapes directory, region S22; picked the first 500 files, https://www.kaggle.com/code/gany24558/pseudo-labeling-soundscapes 
+    -  Re-Trained the base model with this dataset as an additional input
+    	- The model trained along with the pseudo labelled set underperformed - 0.834
+		- Interestingly the intermediate models of the above model did better than the final, but still not good enough - 0.835 and 0.837
+	- The ensemble of the final model and the previous model also underperformed at 0.839, i.e. both B3s unlike previous B3 and B0
+-  3 Jun 2026 (Wed)
+    -  Another pseudolabelling, Created a larger soundscape labelled set - S08 and S22, but only with the rare species and a threshold of 0.8 https://www.kaggle.com/code/gany24558/pseudo-labeling-soundscapes
+        - Pseudo samples are 42.7% of training
+        - Training another version of the base model with this
+        - It again produced worse results - 0.826 and 0.829
