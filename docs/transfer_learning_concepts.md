@@ -1,4 +1,5 @@
 
+## ROC-AUC (Receiver Operating Characteristic - Area Under Curve)
 
 ROC-AUC (Receiver Operating Characteristic - Area Under Curve) measures the probability that the model will rank a randomly chosen positive instance higher than a randomly chosen negative one.
 
@@ -6,7 +7,7 @@ ROC-AUC (Receiver Operating Characteristic - Area Under Curve) measures the prob
 Simple terms: it measures separation—how well the model distinguishes between two groups.
 
 
-1. Feature extractor
+## Feature extractor
 
 A model/module that converts raw input (audio, image, text) into a numeric vector representation (embedding).
 👉 Think:raw data → compact meaningful vector
@@ -14,7 +15,7 @@ Example:
 - audio waveform → 512-d vector capturing “bird sound type”
 ---
 
-2. Selective State Space Model (Selective SSM)
+## Selective State Space Model (Selective SSM)
 
 A sequence model that processes long sequences efficiently by selectively deciding what information to keep or forget over time.
 👉 Think:
@@ -25,7 +26,7 @@ Used for:
 - long time series
 ---
 
-3. Bidirectional SSM layers
+## Bidirectional SSM layers
 
 An SSM that processes data in both directions:
 - forward (past → future)
@@ -35,7 +36,7 @@ Why:
 - captures context from both sides of a sequence
 ---
 
-4. Metadata awareness (site, hour)
+## Metadata awareness (site, hour)
 
 Model also uses extra structured context features, not just raw data.
 Example:
@@ -46,7 +47,7 @@ Like:
 user location + timestamp improves recommendation accuracy
 ---
 
-5. Cross-attention
+## Cross-attention
 
 A mechanism where one data stream looks at another to gather relevant information.
 👉 Think:
@@ -56,7 +57,7 @@ It learns:
 “Which parts of metadata matter for this input?”
 ---
 
-6. Prototypical metric learning
+## Prototypical metric learning
 
 A method where each class is represented by a prototype vector (centroid).
 Prediction = closest prototype in embedding space.
@@ -68,7 +69,7 @@ Used for:
 - similarity-based classification
 ---
 
-7. Gated fusion
+## Gated fusion
 
 A way to combine two signals using a learned weighting gate.
 Formula idea:
@@ -80,7 +81,7 @@ output = gate * A + (1 - gate) * B
 “how much to trust model A vs model B for each input”
 ---
 
-8. Second-pass SSM
+## Second-pass SSM
 
 A model that re-processes already encoded features for refinement.
 👉 Think:
@@ -90,7 +91,7 @@ Like:
 draft → editor pass → final version
 ---
 
-9. Metadata embeddings
+## Metadata embeddings
 
 Convert categorical metadata into dense vectors.
 Example:
@@ -98,7 +99,7 @@ Example:
 👉 Think:Same idea as word embeddings, but for structured fields.
 ---
 
-10. scikit-learn MLP Classifier
+## scikit-learn MLP Classifier
 
 A simple feedforward neural network classifier from scikit-learn.
 👉 Think:
@@ -108,7 +109,7 @@ Why used:
 - fast baseline classifier on top of embeddings
 ---
 
-11. PCA-compressed embeddings
+## PCA-compressed embeddings
 
 Embeddings reduced using Principal Component Analysis (PCA).
 👉 Think:
